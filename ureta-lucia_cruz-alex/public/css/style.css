@@ -1,0 +1,447 @@
+/* ==========================================================================
+   1. CONFIGURACIÓN BASE Y VARIABLES (FONDO PAPEL HUESO)
+   ========================================================================== */
+:root {
+    --primario: #2c3e50;         /* Azul oscuro profesional corporativo */
+    --acento: #d35400;           /* Naranja arcilla / Libro antiguo */
+    --fondo: #f0e2bfa2;          /* Color papel hueso original */
+    --blanco: #ffffff;
+    --rojo-error: #e74c3c;
+    --gris-moderno: #ace8b7a3;   /* Gris oscuro grafito para Nav y Footer */
+    --fosforito: #00f0ff;        /* Celeste cian eléctrico fosforescente */
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    background-color: var(--fondo);
+}
+
+#app {
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+    min-height: 100vh; 
+}
+
+
+/* ==========================================================================
+   2. BARRA DE NAVEGACIÓN (CÁPSULA FLOTANTE + INTERACCIÓN)
+   ========================================================================== */
+.navbar {
+    background-color: #3da64262;
+    margin: 20px !important;            
+    border-radius: 50px !important;     
+    padding: 10px 30px !important;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    border: none !important;
+}
+
+.navbar-brand {
+    color: #b348007d;
+    font-weight: 800;
+    font-size: 1.4rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.navbar-nav {
+    margin-left: auto; 
+    align-items: center;
+}
+
+.nav-link {
+    color: rgb(30, 30, 30) !important; 
+    font-weight: 600;
+    margin: 0 10px;
+    transition: all 0.25s ease-in-out;
+    border-radius: 20px;
+    padding: 6px 15px !important;
+}
+
+/* Efecto hover cian flúor controlado para excelente contraste */
+.nav-link:hover {
+    color: var(--fosforito) !important;
+    background-color: rgba(243, 137, 81, 0.525); 
+    transform: translateY(-2px);
+}
+
+.nav-link[href*="admin/posts"] {
+    color: var(--fosforito) !important; 
+    font-weight: bold;
+}
+
+.navbar .btn-link {
+    color: var(--rojo-error) !important;
+    text-decoration: none !important;
+    font-size: 0.9rem;
+    border: 1px solid rgba(231, 76, 60, 0.6) !important;
+    border-radius: 20px;
+    padding: 5px 15px !important;
+    margin-left: 10px;
+    transition: all 0.3s;
+}
+
+.navbar .btn-link:hover {
+    background-color: var(--rojo-error) !important;
+    color: white !important;
+}
+
+
+/* ==========================================================================
+   3. FOOTER (CÁPSULA FLOTANTE MÁXIMO CONTRASTE)
+   ========================================================================== */
+footer, .footer {
+    background-color: #91e49562; 
+    color: black !important;
+    margin: 40px 20px 20px 20px !important; 
+    border-radius: 50px !important; 
+    box-shadow: 0 -10px 25px rgba(0,0,0,0.15) !important;
+    padding: 25px 0 !important;
+    border: none !important;
+    text-align: center;
+}
+
+footer p, .footer p {
+    color: var(--blanco) !important;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+
+/* ==========================================================================
+   4. COMPONENTES GLOBAL-ESTÁNDAR (TABLAS Y BOTONES)
+   ========================================================================== */
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background: rgba(218, 188, 188, 0.719);
+}
+
+.btn-primary {
+    background-color: var(--acento) !important;
+    border: none !important;
+    border-radius: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #a04000 !important;
+}
+
+.table {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.table thead {
+    background-color: var(--primario);
+    color: white;
+}
+
+
+/* ==========================================================================
+   5. NÚCLEO DE DISEÑO & ESTRUCTURA DE LA HOME
+   ========================================================================== */
+
+/* Auxiliares de Color de Marca */
+.text-primary-custom {
+    color: #117a65 !important; 
+}
+
+.text-dark-blue {
+    color: #2c3e50;
+}
+
+.text-orange-icon {
+    color: var(--acento) !important;
+}
+
+.btn-orange {
+    background-color: var(--acento) !important;
+    color: var(--blanco) !important;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.btn-orange:hover {
+    background-color: #b34700 !important;
+    transform: translateY(-2px);
+}
+
+.hero-mockup {
+    border-radius: 28px !important;
+    transform: rotate(-1.5deg);
+    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+}
+
+.container:hover .hero-mockup {
+    transform: rotate(0deg) scale(1.01);
+}
+
+/* Fondo claro para las categorías destacadas */
+.bg-white-capsule {
+    background-color: #f4f6f7 !important; 
+    border-top: 1px solid rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+    border-radius: 32px;
+    margin: 40px 15px;
+    padding: 3.5rem 1.5rem;
+}
+
+.icon-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    background-color: #e8f8f5; 
+    color: #117a65;
+}
+
+.bg-pastel-1 { background-color: #e3f2fd !important; color: #1e88e5 !important; }
+.bg-pastel-2 { background-color: #f3e5f5 !important; color: #8e24aa !important; }
+.bg-pastel-3 { background-color: #e8f5e9 !important; color: #43a047 !important; }
+.bg-pastel-4 { background-color: #fff3e0 !important; color: #fb8c00 !important; }
+.bg-pastel-5 { background-color: #fce4ec !important; color: #d81b60 !important; }
+.bg-pastel-6 { background-color: #e0f2f1 !important; color: #00897b !important; }
+
+.feature-card {
+    border: none !important;
+    background: #ffffff !important;
+    border-radius: 24px;
+    padding: 1.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: scale(1.04);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.bg-light-step {
+    background-color: #ffffff !important;
+    border-radius: 30px;
+    margin: 40px 15px;
+    padding: 3rem 1rem;
+}
+
+.step-number {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    background-color: var(--acento);
+    color: var(--blanco);
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(230, 126, 34, 0.2);
+}
+
+.step-even {
+    background-color: #2c3e50 !important;
+    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.2);
+}
+
+.hover-zoom {
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease !important;
+}
+
+.hover-zoom:hover {
+    transform: translateY(-8px) !important;
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
+}
+
+
+/* ==========================================================================
+   6. BOTONES DE ACCIÓN COMPLEMENTARIOS (ESTILO INNOVADOR)
+   ========================================================================== */
+.btn-orange-modern {
+    background-color: #53c73066;
+    color: #171616;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 12px 28px;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-orange-modern:hover {
+    background-color: #c91b8c;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.btn-outline-dark-brand {
+    background-color: transparent;
+    color: #2c3e50;
+    font-weight: 600;
+    border-radius: 30px;
+    padding: 12px 28px;
+    border: 2px solid #2c3e50;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-dark-brand:hover {
+    background-color: #93c3f4;
+    color: #ffffff;
+}
+
+
+/* ==========================================================================
+   7. SECCIÓN: CONTROL DE ACCESO (LOGIN)
+   ========================================================================== */
+.login-container {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    border: none;
+    border-radius: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    background-color: #ffffff;
+    padding: 2.5rem;
+}
+
+.btn-login {
+    background-color: #2c3e50;
+    color: #ffffff;
+    border: none;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 16px;
+    transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+    background-color: #1a252f;
+    color: #ffffff;
+    transform: translateY(-1px);
+}
+
+.form-control-custom-field {
+    border-radius: 12px;
+    padding: 10px 14px;
+    border: 2px solid #e2e8f0;
+}
+
+.form-control-custom-field:focus {
+    border-color: #a3e4d7; 
+    box-shadow: 0 0 0 0.25rem rgba(163, 228, 215, 0.25);
+}
+
+.login-warning-box {
+    background-color: #f8f9fa;
+    border-radius: 16px;
+    border: 1px solid #e9ecef;
+    padding: 1rem;
+}
+
+
+/* ==========================================================================
+   8. SECCIÓN: CONTACTO (ESTILOS LIMPIOS Y SEPARADOS)
+   ========================================================================== */
+.contact-container {
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.contact-bg {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+    url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2000&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    border-radius: 40px; 
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    overflow: hidden;
+    padding: 60px 0;
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.95) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+}
+
+
+/* ==========================================================================
+   9. OPTIMIZACIÓN RESPONSIVA (MEDIA QUERIES NATIVAS)
+   ========================================================================== */
+
+/* --- CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES (Pantallas menores a 768px) --- */
+@media (max-width: 767.98px) {
+    .navbar {
+        margin: 10px !important;         /* Reduce márgenes excesivos en celular */
+        border-radius: 25px !important;  /* Ajusta la redondez para pantallas chicas */
+        padding: 10px 20px !important;
+    }
+    
+    .navbar-nav {
+        align-items: flex-start !important; /* Links alineados horizontalmente al desplegar el menú */
+        width: 100%;
+        padding-top: 15px;
+        margin-left: 0;
+    }
+
+    .nav-link {
+        margin: 4px 0 !important;
+        width: 100%;
+        text-align: left;
+    }
+    
+    .navbar .btn-link {
+        margin-left: 0;
+        margin-top: 5px;
+        display: block;
+        width: fit-content;
+    }
+
+    footer, .footer {
+        margin: 30px 10px 10px 10px !important; /* Evita que el footer flote fuera de los límites */
+        border-radius: 25px !important;
+        padding: 20px 10px !important;
+    }
+
+    .bg-white-capsule {
+        margin: 20px 5px !important;
+        padding: 2rem 1rem !important;
+        border-radius: 20px !important;
+    }
+
+    .bg-light-step {
+        margin: 20px 5px !important;
+        padding: 1.5rem 0.5rem !important;
+        border-radius: 20px !important;
+    }
+
+    .contact-bg {
+        border-radius: 20px !important;
+        padding: 30px 10px !important;
+    }
+
+    /* Evita que los textos gigantes rompan el viewport en teléfonos */
+    h1, .display-4 {
+        font-size: 2rem !important;
+    }
+    h2 {
+        font-size: 1.6rem !important;
+    }
+}

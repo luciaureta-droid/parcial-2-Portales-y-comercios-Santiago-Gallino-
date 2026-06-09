@@ -1,0 +1,11 @@
+Carrera: Tecnicatura Superior en Diseño y Programación Web
+Materia: Portales y Comercio Electrónico
+Cuatrimestre: 2do Cuatrimestre
+Año: 2026
+Turno: [Poné tu turno, ej: Noche]
+Comisión: [Poné tu comisión, ej: A]
+Integrantes:
+- Ureta, Lucía
+- Cruz, Alex
+Docente: Santiago Gallino
+Carácter de entrega: 2do Parcial
