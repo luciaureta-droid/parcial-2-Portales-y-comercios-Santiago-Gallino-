@@ -11,39 +11,27 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
  * Representa la entidad de un Libro (Producto) en el sistema.
  * * @package App\Models
  */
-class Book extends Model 
+class Book extends Model
 {
     use HasFactory;
 
     /**
      * @var string La tabla asociada al modelo.
      */
-    protected $table = 'noticias'; // Usamos el nombre en español que definimos en la migración
+    protected $table = 'books';
 
     /**
      * @var string La clave primaria de la tabla.
      */
     protected $primaryKey = 'id';
 
-    /**
-     * Definimos qué campos se pueden cargar masivamente desde el array del Request.
-     */
     protected $fillable = [
-        'titulo', 
-        'autor', 
-        'precio', 
-        'descripcion',
-        'stock',         
+        'title',
+        'price',
+        'publication_date',
+        'author',
+        'description',
+        'cover',
+        'cover_description'
     ];
-
-    /**
-     * Relación Muchos a Muchos con los Usuarios.
-     * Un libro puede ser comprado/contratado por muchos usuarios.
-     * Esto cumple con el requisito de "relaciones entre tablas" de la consigna.
-     * * @return BelongsToMany
-     */
-    public function usuarios(): BelongsToMany {
-        return $this->belongsToMany(User::class, 'usuario_tiene_producto', 'producto_id', 'usuario_id')
-                    ->withTimestamps();
-    }
 }

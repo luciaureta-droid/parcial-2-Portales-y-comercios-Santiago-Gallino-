@@ -7,10 +7,11 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
-public function index() {
+    public function index()
+    {
         // Simulamos un catálogo completo de 20 libros clásicos e imperdibles
         // para demostrarle al profesor la escalabilidad del diseño de tarjetas.
-        $books = [
+        /* $books = [
             (object)['id' => 1, 'title' => 'El Alquimista - Paulo Coelho', 'price' => 12500, 'cover' => 'alquimista.png'],
             (object)['id' => 2, 'title' => 'Cien Años de Soledad - G. García Márquez', 'price' => 18900, 'cover' => 'soledad.png'],
             (object)['id' => 3, 'title' => 'Ficciones - Jorge Luis Borges', 'price' => 14200, 'cover' => 'ficciones.png'],
@@ -31,18 +32,20 @@ public function index() {
             (object)['id' => 18, 'title' => 'Fahrenheit 451 - Ray Bradbury', 'price' => 13500, 'cover' => 'fahrenheit.png'],
             (object)['id' => 19, 'title' => 'La Invención de Morel - Adolfo Bioy Casares', 'price' => 12100, 'cover' => 'morel.png'],
             (object)['id' => 20, 'title' => 'Antología Poética - Mario Benedetti', 'price' => 10500, 'cover' => 'benedetti.png']
-        ];
-        
+        ]; */
+        $books = Book::all();
+
         return view('books.index', [
-            'books' => $books
+            'books' => $books,
         ]);
     }
 
-    public function show(int $id) {
+    public function show(int $id)
+    {
         $book = Book::findOrFail($id);
 
         return view('books.show', [
-            'book' => $book
+            'book' => $book,
         ]);
     }
 }
