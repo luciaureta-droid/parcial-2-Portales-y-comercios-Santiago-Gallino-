@@ -26,7 +26,7 @@ class AuthController extends Controller
             $request->session()->regenerate();
             
             // 3. ¡COMO LOGRÁS ENTRAR, TE MANDA DIRECTO AL PANEL DE ABM DE NOTICIAS!
-            return redirect()->route('blog.index');
+            return redirect()->route('books.index');
         }
 
         // Si falla, vuelve atrás mostrando el error

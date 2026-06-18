@@ -8,13 +8,13 @@
                 <span class="text-uppercase fw-bold text-orange-icon small" style="letter-spacing: 2px;">Nuestra Colección</span>
                 <h1 class="display-5 fw-bold text-dark-blue mt-1 mb-0">Libros Disponibles</h1>
             </div>
-            @auth
+            {{-- @auth
             <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
                 <a href="{{ route('books.create') }}" class="btn btn-orange px-4 py-2 shadow-sm">
                     <i class="bi bi-plus-circle me-2"></i>Publicar Nuevo Libro
                 </a>
             </div>
-            @endauth
+            @endauth --}}
         </div>
 
         {{-- Grilla de Tarjetas Interactivas --}}
@@ -47,7 +47,7 @@
                                 </a>
 
                                 {{-- Acciones Administrativas (Solo visibles si estás logueada) --}}
-                                @auth
+                                {{-- @auth
                                 <div class="d-flex gap-2 mt-2 border-top pt-2 justify-content-between">
                                     <a href="{{ route('books.edit', ['id' => $book->id]) }}" class="btn btn-sm btn-link text-secondary text-decoration-none p-0">
                                         <i class="bi bi-pencil-square me-1"></i> Editar
@@ -56,7 +56,7 @@
                                         <i class="bi bi-trash me-1"></i> Eliminar
                                     </a>
                                 </div>
-                                @endauth
+                                @endauth --}}
                             </div>
                         </div>
                     </div>
