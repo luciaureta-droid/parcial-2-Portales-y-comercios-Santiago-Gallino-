@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('title',100);
             $table->unsignedInteger('price');
             $table->date('publication_date');
-            $table->string('author');
+            //$table->string('author');//Esto se agrega en la proxima migracion.
             $table->text('description')->nullable();
             $table->string('cover')->nullable();
             $table->string('cover_description')->nullable();

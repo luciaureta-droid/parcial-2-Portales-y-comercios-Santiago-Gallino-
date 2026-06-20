@@ -25,7 +25,10 @@ class DatabaseSeeder extends Seeder
 
         // Llamamos al seeder de libros que ya tenías configurado
         $this->call([
+            AuthorSeeder::class,
+            GenreSeeder::class,
             BookSeeder::class,
+            BookGenreSeeder::class,
         ]);
     }
 }

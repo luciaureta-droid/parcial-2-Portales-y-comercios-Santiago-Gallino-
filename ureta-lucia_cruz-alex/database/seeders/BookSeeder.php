@@ -41,15 +41,13 @@ class BookSeeder extends Seeder
             ]
         ]); */
 
-
-
         DB::table('books')->insert([
 
             [
                 'title' => 'El Alquimista',
+                'author_fk' => 1,
                 'price' => 12500,
                 'publication_date' => '1988-01-01',
-                'author' => 'Paulo Coelho',
                 'description' => 'Una novela sobre el destino y la búsqueda personal.',
                 'cover' => null,
                 'cover_description' => 'Portada del libro El Alquimista de Paulo Coelho',
@@ -59,9 +57,9 @@ class BookSeeder extends Seeder
 
             [
                 'title' => 'Cien Años de Soledad',
+                'author_fk' => 2,
                 'price' => 18900,
                 'publication_date' => '1967-05-30',
-                'author' => 'Gabriel García Márquez',
                 'description' => 'Una obra maestra del realismo mágico latinoamericano.',
                 'cover' => null,
                 'cover_description' => 'Portada del libro Cien Años de Soledad de Gabriel García Márquez',
@@ -71,9 +69,9 @@ class BookSeeder extends Seeder
 
             [
                 'title' => 'Ficciones',
+                'author_fk' => 3,
                 'price' => 14200,
                 'publication_date' => '1944-01-01',
-                'author' => 'Jorge Luis Borges',
                 'description' => 'Colección de cuentos filosóficos y fantásticos.',
                 'cover' => null,
                 'cover_description' => 'Portada del libro Ficciones de Jorge Luis Borges',
@@ -83,9 +81,9 @@ class BookSeeder extends Seeder
 
             [
                 'title' => 'El Principito',
+                'author_fk' => 4,
                 'price' => 8500,
                 'publication_date' => '1943-04-06',
-                'author' => 'Antoine de Saint-Exupéry',
                 'description' => 'Un clásico sobre la amistad, la inocencia y la vida.',
                 'cover' => null,
                 'cover_description' => 'Portada del libro El Principito de Antoine de Saint-Exupéry',
