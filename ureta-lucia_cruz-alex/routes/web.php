@@ -95,3 +95,11 @@ Route::get('/contacto', function () {
 Route::post('/contacto', function () {
     return back()->with('feedback.message', '¡Gracias por comunicarte! Te responderemos a la brevedad.')->with('feedback.type', 'success');
 });
+
+// Ruta para el ABM / Panel de Administración de Libros
+Route::get('/admin/libros', [App\Http\Controllers\BookAdminController::class, 'index'])
+    ->name('books.admin')
+    ->middleware('auth'); // Para que solo entren administradores logueados
+    // Rutas para Editar y Eliminar Libros
+Route::get('/admin/libros/{id}/editar', [\App\Http\Controllers\BookAdminController::class, 'edit'])->name('books.edit')->middleware('auth');
+Route::delete('/admin/libros/{id}', [\App\Http\Controllers\BookAdminController::class, 'destroy'])->name('books.destroy')->middleware('auth');

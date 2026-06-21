@@ -1,41 +1,53 @@
+<?php
+/** @var \App\Models\Post $post */
+?>
 <x-main-layout>
-    <x-slot:title>Confirmar Eliminación :: Admin</x-slot:title>
+    <x-slot:title>Eliminar el artículo: {{ $post->title }}</x-slot:title>
 
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-sm border-0 bg-white p-4 text-center">
-                    <div class="text-danger mb-3">
-                        <i class="bi bi-exclamation-triangle-fill" style="font-size: 3rem;"></i>
-                    </div>
-                    
-                    <h1 class="h3 fw-bold text-dark mb-2">¿Confirmás que querés eliminar esta noticia?</h1>
-                    <p class="text-muted mb-4">Esta acción no se puede deshacer de ninguna manera.</p>
+    <h1 class="mb-3">Confirmación necesaria para eliminar</h1>
 
-                    {{-- Caja informativa con los datos de la noticia a borrar --}}
-                    <div class="p-3 bg-light rounded text-start mb-4 border">
-                        <p class="mb-1 text-muted small">Título:</p>
-                        <p class="fw-bold text-dark mb-2">{{ $noticia->titulo }}</p>
-                        <p class="mb-1 text-muted small">Autor:</p>
-                        <p class="text-secondary mb-0">{{ $noticia->autor_noticia }}</p>
-                    </div>
+    <p>Estás por eliminar de manera definitiva el artículo <b>{{ $post->title }}</b>.</p>
+    <p>Esta acción <b>no es reversible</b>, y requiere una confirmación.</p>
+    <p>A continuación se muestran los datos del artículo para revisar.</p>
 
-                    {{-- Formulario definitivo que viaja hacia el método destroy del controlador --}}
-                    <form action="{{ route('blog.destroy', $noticia->id) }}" method="POST">
-                        @csrf
-                        @method('DELETE') {{-- Directiva obligatoria en Laravel para eliminar --}}
+    <hr class="mb-3">
 
-                        <div class="d-flex justify-content-center gap-3">
-                            <a href="{{ route('blog.index') }}" class="btn btn-secondary px-4 fw-semibold">
-                                Cancelar
-                            </a>
-                            <button type="submit" class="btn btn-danger px-4 fw-semibold shadow-sm">
-                                <i class="bi bi-trash"></i> Eliminar Permanentemente
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <h2 class="mb-3">{{ $post->title }}</h2>
+
+    {{-- Lista de datos del Post con la etiqueta <dl> que usa el profesor --}}
+    <dl class="mb-3">
+        <dt><b>Copete / Resumen</b></dt>
+        <dd>{{ $post->summary }}</dd>
+        
+        <dt><b>Autor Relacionado</b></dt>
+        <dd>{{ $post->author?->name ?? 'Sin autor asignado' }}</dd>
+        
+        <dt><b>Fecha de Creación</b></dt>
+        <dd>{{ $post->created_at->format('d/m/Y H:i') }}</dd>
+    </dl>
+
+    @if($post->image !== null && \Storage::disk('public')->exists($post->image))
+        <div class="mb-3">
+            <span class="fw-bold d-block mb-1">Imagen del artículo:</span>
+            <img src="{{ \Storage::url($post->image) }}" alt="Imagen de {{ $post->title }}" class="img-fluid rounded" style="max-width: 250px;">
         </div>
-    </div>
+    @endif
+
+    <hr class="mb-3">
+
+    <h3 class="mb-2">Cuerpo de la noticia</h3>
+    <div class="mb-3">{{ $post->content }}</div>
+
+    <hr class="mb-3">
+
+    <h2 class="mb-3 text-danger">¿Seguro que querés eliminar este artículo?</h2>
+
+    {{-- Formulario que ejecuta la acción DELETE por método POST en Laravel con la directiva @method --}}
+    <form action="{{ route('blog.destroy', ['id' => $post->id]) }}" method="POST">
+        @csrf
+        @method('DELETE')
+        
+        <button type="submit" class="btn btn-danger px-4">Sí, eliminar {{ $post->title }}</button>
+        <a href="{{ route('blog.index') }}" class="btn btn-secondary px-4 ms-2">Cancelar y volver</a>
+    </form>
 </x-main-layout>

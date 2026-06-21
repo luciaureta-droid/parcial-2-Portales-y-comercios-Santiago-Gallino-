@@ -34,11 +34,18 @@
                             <li class="nav-item">
                                 <x-nav-link to="about">Nosotros</x-nav-link>
                             </li>
+                            
+                            {{-- Enlace dinámico de Libros: cambia según si estás logueada o no --}}
                             <li class="nav-item">
-                                <x-nav-link to="books.index">Libros</x-nav-link>
+                                @auth
+                                    <x-nav-link to="books.admin">Libros</x-nav-link>
+                                @else
+                                    <x-nav-link to="books.index">Libros</x-nav-link>
+                                @endauth
                             </li>
+
                             <li class="nav-item">
-                                <x-nav-link to="blog.index">Blog de Noticias</x-nav-link>
+                                <x-nav-link to="blog.index">Blog de Autores</x-nav-link>
                             </li>
                             <li class="nav-item">
                                 <x-nav-link to="contacto">Contacto</x-nav-link>
@@ -76,7 +83,7 @@
             </footer>
         </div>
 
-        {{-- El complemento de JavaScript de Bootstrap (Indispensable para que el botón despliegue) --}}
+        {{-- El complemento de JavaScript de Bootstrap --}}
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     </body>
 </html>

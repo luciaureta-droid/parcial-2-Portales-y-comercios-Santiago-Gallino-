@@ -21,12 +21,12 @@ class AuthController extends Controller
             'password' => ['required'],
         ]);
 
-        // 2. Intentamos iniciar sesión (Se contrasta con los usuarios cargados mediante el Seeder)
+        // 2. Intentamos iniciar sesión
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
             
-            // 3. ¡COMO LOGRÁS ENTRAR, TE MANDA DIRECTO AL PANEL DE ABM DE NOTICIAS!
-            return redirect()->route('books.index');
+            // 3.  Ahora te manda directo al panel administrativo (ABM)
+            return redirect()->route('blog.index');
         }
 
         // Si falla, vuelve atrás mostrando el error

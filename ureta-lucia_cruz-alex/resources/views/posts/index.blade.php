@@ -1,64 +1,102 @@
+<?php
+/** * Documentación de variables de entrada para optimizar el editor
+ * @var \Illuminate\Database\Eloquent\Collection|array $posts 
+ * @var array $searchParams 
+ */
+?>
+
 <x-main-layout>
-    <x-slot:title>Panel de Administración :: Blog</x-slot:title>
+    {{-- Título de la pestaña utilizando slots y traducciones --}}
+    <x-slot:title>@lang('Blog Articles')</x-slot:title>
 
-    <div class="container py-5">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <h1 class="h2 fw-bold text-dark m-0"> Panel de Control: Noticias</h1>
-                <p class="text-muted m-0">Espacio de administración para gestionar las publicaciones.</p>
-            </div>
-            <a href="{{ route('blog.create') }}" class="btn btn-success fw-bold">
-                <i class="bi bi-plus-lg"></i> Redactar Nueva Noticia
-            </a>
+    <h1 class="mb-3">@lang('Blog Articles')</h1>
+
+    {{-- Enlace visible únicamente para usuarios autenticados --}}
+    @auth
+    <div class="mb-3">
+        <a href="{{ route('blog.create') }}" class="btn btn-success">@lang('Publish a new article')</a>
+    </div>
+    @endauth
+
+    {{-- Formulario de Filtrado / Buscador --}}
+    <form action="{{ route('blog.index') }}" method="GET" class="mb-4">
+        <h2 class="h4 mb-3">Filtrar Publicaciones</h2>
+
+        <div class="mb-2">
+            <label for="s_title" class="form-label">Buscar por Título</label>
+            <input
+                type="search"
+                id="s_title"
+                name="s_title"
+                class="form-control"
+                value="{{ $searchParams['s_title'] ?? null }}"
+                placeholder="Escribí el título acá..."
+            >
         </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
 
-        @if(session('status'))
-            <div class="alert alert-success border-0 shadow-sm mb-4">{{ session('status') }}</div>
+    <h2 class="visually-hidden">Listado de Artículos</h2>
+
+    {{-- Comprobación si existen artículos cargados en la colección --}}
+    @if($posts->isNotEmpty())
+        @if(($searchParams['s_title'] ?? null) !== null)
+        <p class="mb-3"><i>Mostrando resultados encontrados para: "<b>{{ $searchParams['s_title'] }}</b>".</i></p>
         @endif
 
-        <div class="card shadow-sm border-0 bg-white">
-            <div class="table-responsive">
-                <table class="table table-hover align-middle m-0">
-                    <thead class="table-dark">
-                        <tr>
-                            <th style="width: 100px;">Miniatura</th>
-                            <th>Título de la Noticia</th>
-                            <th>Autor</th>
-                            <th>Fecha</th>
-                            <th class="text-end">Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($posts as $post)
-                            <tr>
-                                <td>
-                                    @if($post->image)
-                                        <img src="{{ asset('storage/' . $post->image) }}" alt="Portada" class="img-thumbnail" style="max-height: 50px;">
-                                    @else
-                                        <span class="text-muted small">Sin imagen</span>
-                                    @endif
-                                </td>
-                                <td class="fw-bold text-dark">{{ $post->title }}</td>
-                                <td class="text-secondary">{{ $post->author }}</td>
-                                <td class="text-muted small">{{ $post->created_at->format('d/m/Y') }}</td>
-                                <td class="text-end">
-                                    <a href="{{ route('blog.edit', $post->id) }}" class="btn btn-sm btn-outline-primary fw-bold me-1">Editar</a>
-                                    <a href="{{ route('blog.delete', $post->id) }}" class="btn btn-sm btn-outline-danger fw-bold">Eliminar</a>
-                                </td>
-                            </tr>
-                        @empty
-                            <tr>
-                                <td colspan="5" class="text-center p-4 text-muted">No tenés ninguna noticia publicada todavía en la base de datos.</td>
-                            </tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <table class="table table-bordered table-striped align-middle">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Copete</th>
+                    <th>Autor Relacionado</th>
+                    <th>Fecha de Creación</th>
+                    <th>Acciones Administrativas</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($posts as $post)
+                <tr>
+                    {{-- Acceso directo a propiedades del modelo Eloquent --}}
+                    <td class="fw-bold">{{ $post->title }}</td>
+                    
+                    {{-- 🌟 MODIFICADO: Cambiamos 'summary' por 'description' para usar la columna real de la tabla books --}}
+                    <td>{{ $post->description }}</td>
+                    
+                    {{-- Acceso seguro al nombre del autor por la relación belongsTo --}}
+                    <td>
+                        @if($post->author)
+                            <span class="badge bg-secondary">{{ $post->author->name }}</span>
+                        @elseif($post->autor)
+                            <span class="badge bg-secondary">{{ $post->autor->name }}</span>
+                        @else
+                            <span class="text-muted italic">Sin autor asignado</span>
+                        @endif
+                    </td>
+                    
+                    <td>{{ $post->created_at->format('d/m/Y') }}</td>
+                    <td>
+                        <div class="d-flex gap-2">
+                            {{-- Vista pública del post --}}
+                            <a href="{{ route('blog.show', ['id' => $post->id]) }}" class="btn btn-sm btn-primary">Ver</a>
 
-        {{-- Paginación de la Clase 12 --}}
-        <div class="d-flex justify-content-center mt-4">
+                            {{-- Botones de edición y borrado protegidos por autenticación --}}
+                            @auth
+                            <a href="{{ route('blog.edit', ['id' => $post->id]) }}" class="btn btn-sm btn-secondary">Editar</a>
+                            <a href="{{ route('blog.delete', ['id' => $post->id]) }}" class="btn btn-sm btn-danger">Eliminar</a>
+                            @endauth
+                        </div>
+                    </td>
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+
+        {{-- Renderizado automático de los enlaces de paginación --}}
+        <div class="mt-3">
             {{ $posts->links() }}
         </div>
-    </div>
+    @else
+        <p class="alert alert-warning">No se encontraron artículos cargados que coincidan con "<b>{{ $searchParams['s_title'] ?? '' }}</b>".</p>
+    @endif
 </x-main-layout>
