@@ -7,4 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Genre extends Model
 {
     //
+    public function books()
+    {
+        return $this->belongsToMany(
+            Book::class,
+            'book_genre',
+            'genre_fk',
+            'book_fk'
+        );
+    }
 }

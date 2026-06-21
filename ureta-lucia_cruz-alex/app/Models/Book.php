@@ -29,9 +29,27 @@ class Book extends Model
         'title',
         'price',
         'publication_date',
-        'author',
+        'author_fk',//Se cambio esto, antes era author
         'description',
         'cover',
         'cover_description'
     ];
+
+
+    /* Se agrega esta funcion. Esto esta en la version 3 de git*/
+    public function author()
+    {
+        return $this->belongsTo(Author::class, 'author_fk');
+    }
+
+    /* Se agrega esta funcion. Esto esta en la version 3 de git  */
+    public function genres()
+    {
+        return $this->belongsToMany(
+            Genre::class,
+            'book_genre',
+            'book_fk',
+            'genre_fk'
+        );
+    }
 }
