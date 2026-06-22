@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AuthorController;//Se agrego esto por el author controller
+use App\Http\Controllers\AuthorController; //Se agrego esto por el author controller
 /*
 |--------------------------------------------------------------------------
 |  SITIO PÚBLICO (Para usuarios comunes)
@@ -13,8 +13,8 @@ use App\Http\Controllers\AuthorController;//Se agrego esto por el author control
 */
 
 // Carga directa de la vista welcome para evitar la pantalla por defecto de Laravel
-Route::get('/', function () { 
-    return view('welcome'); 
+Route::get('/', function () {
+    return view('welcome');
 })->name('home');
 
 Route::get('/nosotros', [HomeController::class, 'about'])
@@ -30,8 +30,8 @@ Route::get('/libros/{id}', [BookController::class, 'show'])
 
 // Blog de Noticias público (Listado y Detalle)
 //Route::get('/blog/listado', [PostController::class, 'index'])//Se cambio esta linea, esto puso Lucia, 
-Route::get('/blog/listado', [AuthorController::class, 'index'])//Esta nueva linea es para redireccionar al blog
-    ->name('blog.index');//Esta linea es la misma para cualquiera de los dos.
+Route::get('/blog/listado', [AuthorController::class, 'index']) //Esta nueva linea es para redireccionar al blog
+    ->name('blog.index'); //Esta linea es la misma para cualquiera de los dos.
 
 
 Route::get('/blog/{id}', [PostController::class, 'show'])
@@ -102,6 +102,23 @@ Route::post('/contacto', function () {
 Route::get('/admin/libros', [App\Http\Controllers\BookAdminController::class, 'index'])
     ->name('books.admin')
     ->middleware('auth'); // Para que solo entren administradores logueados
-    // Rutas para Editar y Eliminar Libros
-Route::get('/admin/libros/{id}/editar', [\App\Http\Controllers\BookAdminController::class, 'edit'])->name('books.edit')->middleware('auth');
-Route::delete('/admin/libros/{id}', [\App\Http\Controllers\BookAdminController::class, 'destroy'])->name('books.destroy')->middleware('auth');
+
+
+Route::put('/admin/libros/{id}/actualizar', [\App\Http\Controllers\BookAdminController::class, 'update'])
+    ->name('books.update')
+    ->whereNumber('id')
+    ->middleware('auth');
+
+
+// Rutas para Editar y Eliminar Libros
+Route::get('/admin/libros/{id}/editar', [\App\Http\Controllers\BookAdminController::class, 'edit'])
+    ->name('books.edit')
+    ->middleware('auth');
+
+
+
+
+
+Route::delete('/admin/libros/{id}', [\App\Http\Controllers\BookAdminController::class, 'destroy'])
+    ->name('books.destroy')
+    ->middleware('auth');
