@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\AuthController;
-
+use App\Http\Controllers\AuthorController;//Se agrego esto por el author controller
 /*
 |--------------------------------------------------------------------------
 |  SITIO PÚBLICO (Para usuarios comunes)
@@ -29,8 +29,10 @@ Route::get('/libros/{id}', [BookController::class, 'show'])
     ->whereNumber('id');
 
 // Blog de Noticias público (Listado y Detalle)
-Route::get('/blog/listado', [PostController::class, 'index'])
-    ->name('blog.index');
+//Route::get('/blog/listado', [PostController::class, 'index'])//Se cambio esta linea, esto puso Lucia, 
+Route::get('/blog/listado', [AuthorController::class, 'index'])//Esta nueva linea es para redireccionar al blog
+    ->name('blog.index');//Esta linea es la misma para cualquiera de los dos.
+
 
 Route::get('/blog/{id}', [PostController::class, 'show'])
     ->name('blog.show')
