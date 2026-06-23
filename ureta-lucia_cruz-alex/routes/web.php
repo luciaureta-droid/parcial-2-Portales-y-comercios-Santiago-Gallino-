@@ -99,6 +99,17 @@ Route::post('/contacto', function () {
 });
 
 // Ruta para el ABM / Panel de Administración de Libros
+
+Route::get('/admin/libros/crear', [\App\Http\Controllers\BookAdminController::class, 'create'])
+    ->name('books.create')
+    ->middleware('auth');
+
+
+Route::post('/admin/libros/guardar', [\App\Http\Controllers\BookAdminController::class, 'store'])
+    ->name('books.store')
+    ->middleware('auth');
+
+
 Route::get('/admin/libros', [App\Http\Controllers\BookAdminController::class, 'index'])
     ->name('books.admin')
     ->middleware('auth'); // Para que solo entren administradores logueados

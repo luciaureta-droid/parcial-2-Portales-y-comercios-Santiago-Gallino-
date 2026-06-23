@@ -9,7 +9,7 @@
             </div>
             <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
                 {{-- Más adelante le crearemos la ruta books.create aquí --}}
-                <a href="#" class="btn btn-success px-4 py-2 shadow-sm fw-bold">
+                <a href="{{ route('books.create') }}" class="btn btn-success px-4 py-2 shadow-sm fw-bold">
                     ➕ Cargar Nuevo Libro
                 </a>
             </div>

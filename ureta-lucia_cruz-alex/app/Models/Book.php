@@ -29,7 +29,7 @@ class Book extends Model
         'title',
         'price',
         'publication_date',
-        'author',
+        'author_fk',
         'description',
         'cover',
         'cover_description'
