@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 /**
  * Clase Book
  * Representa la entidad de un Libro (Producto) en el sistema.
- * * @package App\Models
+ * @package App\Models
  */
 class Book extends Model
 {
@@ -32,6 +32,20 @@ class Book extends Model
         'author',
         'description',
         'cover',
-        'cover_description'
+        'cover_description',
+        'author_fk', 
     ];
+
+    /**
+     * Relación de muchos a muchos con los Géneros.
+     */
+    public function genres(): BelongsToMany
+    {
+        return $this->belongsToMany(
+            Genre::class,      // Modelo con el que se relaciona
+            'book_genre',      // Tabla intermedia en tu phpMyAdmin
+            'book_fk',         // Clave foránea de esta tabla en la intermedia
+            'genre_fk'         // Clave foránea del género en la intermedia
+        );
+    }
 }

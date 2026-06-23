@@ -2,13 +2,19 @@
    1. CONFIGURACIÓN BASE Y VARIABLES (FONDO PAPEL HUESO)
    ========================================================================== */
 :root {
-    --primario: #2c3e50;         /* Azul oscuro profesional corporativo */
-    --acento: #d35400;           /* Naranja arcilla / Libro antiguo */
-    --fondo: #f0e2bfa2;          /* Color papel hueso original */
+    --primario: #2c3e50;         
+    --acento: #d35400;           
+    --fondo: #f0e2bfa2;          
     --blanco: #ffffff;
     --rojo-error: #e74c3c;
-    --gris-moderno: #ace8b7a3;   /* Gris oscuro grafito para Nav y Footer */
-    --fosforito: #00f0ff;        /* Celeste cian eléctrico fosforescente */
+    --gris-moderno: #ace8b7a3;   
+    --fosforito: #00f0ff;        
+    
+    --marron-pastel: #f3ebe1;    
+    --marron-texto: #2b1810;     
+    --marron-subtexto: #5c4033;  
+    --verde-pastel: #8cb89f;     
+    --verde-estandar: #227333;   
 }
 
 html, body {
@@ -27,7 +33,7 @@ html, body {
 
 
 /* ==========================================================================
-   2. BARRA DE NAVEGACIÓN (CÁPSULA FLOTANTE + INTERACCIÓN)
+   2. BARRA DE NAVEGACIÓN (CÁPSULA FLOTANTE)
    ========================================================================== */
 .navbar {
     background-color: #3da64262;
@@ -61,37 +67,170 @@ html, body {
     padding: 6px 15px !important;
 }
 
-/* Efecto hover cian flúor controlado para excelente contraste */
 .nav-link:hover {
     color: var(--fosforito) !important;
     background-color: rgba(243, 137, 81, 0.525); 
     transform: translateY(-2px);
 }
 
-.nav-link[href*="admin/posts"] {
-    color: var(--fosforito) !important; 
-    font-weight: bold;
+
+/* ==========================================================================
+   3. FILTRAR PUBLICACIONES (EL BUSCADOR CORREGIDO - CHICO Y COMPACTO)
+   ========================================================================= */
+/* Forzamos a que el contenedor del buscador NO herede propiedades de las tarjetas grandes */
+.filter-news-card, 
+div[class*="filter"], 
+form[class*="filter"] {
+    background-color: rgba(44, 62, 80, 0.05) !important; /* Un sutil contraste */
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    padding: 15px 25px !important;
+    margin: 0 auto 35px auto !important;
+    border-radius: 30px !important;
+    max-width: 650px !important; /* 🛡️ Evita que ocupe toda la pantalla horizontal */
+    width: 90% !important;
+    height: auto !important;     /* 🛡️ Evita que se estire hacia abajo */
+    min-height: unset !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 15px !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important;
 }
 
-.navbar .btn-link {
-    color: var(--rojo-error) !important;
-    text-decoration: none !important;
-    font-size: 0.9rem;
-    border: 1px solid rgba(231, 76, 60, 0.6) !important;
-    border-radius: 20px;
-    padding: 5px 15px !important;
-    margin-left: 10px;
-    transition: all 0.3s;
+/* El input interno del buscador */
+.filter-news-card input, 
+div[class*="filter"] input {
+    max-width: 400px !important;
+    border-radius: 20px !important;
+    padding: 8px 15px !important;
+    border: 1px solid #ced4da !important;
 }
 
-.navbar .btn-link:hover {
-    background-color: var(--rojo-error) !important;
-    color: white !important;
+/* El botón de Buscar */
+.filter-news-card .btn, 
+div[class*="filter"] .btn {
+    border-radius: 20px !important;
+    padding: 8px 20px !important;
+    height: auto !important;
 }
 
 
 /* ==========================================================================
-   3. FOOTER (CÁPSULA FLOTANTE MÁXIMO CONTRASTE)
+   4. TARJETAS (CARDS) - PROTECCIÓN COMPLETA DE TEXTOS
+   ========================================================================== */
+.card {
+    border: 1px solid #e1d6c7 !important;
+    border-radius: 14px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.06);
+    background: var(--marron-pastel) !important;
+    padding: 20px !important;
+    
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+    position: relative !important;
+}
+
+/* Títulos del Blog de Autores */
+.card h1 {
+    font-size: 1.5rem !important; 
+    font-weight: 800 !important;
+    color: var(--marron-texto) !important;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+/* Descripción / Cuerpo de texto del artículo */
+.card h2, .card p, .card .card-text {
+    font-size: 1.05rem !important;  
+    font-weight: 500 !important;
+    color: var(--marron-subtexto) !important;
+    line-height: 1.5;
+    margin-bottom: 20px !important;
+    flex-grow: 1 !important; 
+}
+
+/* 🟢 FILA INFERIOR DE LA TARJETA (Fecha + Botón VER alineados perfectamente) */
+.card-footer-blog, 
+.card .d-flex.justify-content-between.align-items-center {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-top: auto !important; 
+    padding-top: 10px !important;
+    position: static !important; 
+}
+
+/* Botón VER en formato óvalo limpio */
+.card a[href*="/blog/"]:not([href*="/blog/nuevo"]), 
+.card a.btn-success:contains("VER"), 
+.card .card-body a.btn-primary:contains("VER"),
+.card a.btn[href*="/blog/"] {
+    position: static !important; 
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    background-color: var(--verde-estandar) !important; 
+    color: var(--blanco) !important;  
+    font-weight: 700 !important;
+    font-size: 0.9rem !important;
+    padding: 6px 18px !important;
+    border-radius: 20px !important;
+    text-decoration: none !important;
+    box-shadow: 0 4px 8px rgba(34, 115, 51, 0.2) !important;
+    transition: all 0.2s ease;
+}
+
+.card a[href*="/blog/"]:hover {
+    background-color: #164e22 !important;
+    transform: scale(1.03);
+}
+
+/* Fecha limpia */
+.card small.text-muted, 
+.card .text-muted {
+    position: static !important;
+    font-size: 0.85rem !important;
+    color: #6c757d !important;
+}
+
+/* Botones de administración (Editar / Eliminar) */
+.card .d-flex.justify-content-end.gap-2 {
+    margin-top: 10px !important;
+    width: 100% !important;
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 5px !important;
+}
+
+
+/* ==========================================================================
+   5. CATÁLOGO DE LIBROS Y PROSEGUIMIENTO COLECTIVO
+   ========================================================================== */
+.card .card-title, .card h4 {
+    color: var(--marron-texto) !important;
+    font-size: 1.35rem !important;
+    font-weight: 700 !important;
+}
+
+.card a[href*="/libros/"] {
+    display: block !important;
+    width: 100% !important;
+    padding: 10px !important;
+    background-color: var(--verde-estandar) !important; 
+    color: var(--blanco) !important;  
+    border-radius: 25px !important;   
+    text-align: center !important;
+    text-decoration: none !important;
+}
+
+
+/* ==========================================================================
+   6. FOOTER
    ========================================================================== */
 footer, .footer {
     background-color: #91e49562; 
@@ -104,484 +243,23 @@ footer, .footer {
     text-align: center;
 }
 
-footer p, .footer p {
-    color: var(--blanco) !important;
-    margin: 0;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    font-size: 0.85rem;
-}
-
 
 /* ==========================================================================
-   4. COMPONENTES GLOBAL-ESTÁNDAR (TABLAS Y BOTONES)
+   7. OPTIMIZACIÓN RESPONSIVA
    ========================================================================== */
-.card {
-    border: none;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    background: rgba(218, 188, 188, 0.719);
-}
-
-.btn-primary {
-    background-color: var(--acento) !important;
-    border: none !important;
-    border-radius: 20px;
-}
-
-.btn-primary:hover {
-    background-color: #a04000 !important;
-}
-
-.table {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-}
-
-.table thead {
-    background-color: var(--primario);
-    color: white;
-}
-
-
-/* ==========================================================================
-   5. NÚCLEO DE DISEÑO & ESTRUCTURA DE LA HOME
-   ========================================================================== */
-
-/* Auxiliares de Color de Marca */
-.text-primary-custom {
-    color: #117a65 !important; 
-}
-
-.text-dark-blue {
-    color: #2c3e50;
-}
-
-.text-orange-icon {
-    color: var(--acento) !important;
-}
-
-.btn-orange {
-    background-color: var(--acento) !important;
-    color: var(--blanco) !important;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.btn-orange:hover {
-    background-color: #b34700 !important;
-    transform: translateY(-2px);
-}
-
-.hero-mockup {
-    border-radius: 28px !important;
-    transform: rotate(-1.5deg);
-    transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
-}
-
-.container:hover .hero-mockup {
-    transform: rotate(0deg) scale(1.01);
-}
-
-/* Fondo claro para las categorías destacadas */
-.bg-white-capsule {
-    background-color: #f4f6f7 !important; 
-    border-top: 1px solid rgba(0, 0, 0, 0.03);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-    border-radius: 32px;
-    margin: 40px 15px;
-    padding: 3.5rem 1.5rem;
-}
-
-.icon-circle {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.3rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    background-color: #e8f8f5; 
-    color: #117a65;
-}
-
-.bg-pastel-1 { background-color: #e3f2fd !important; color: #1e88e5 !important; }
-.bg-pastel-2 { background-color: #f3e5f5 !important; color: #8e24aa !important; }
-.bg-pastel-3 { background-color: #e8f5e9 !important; color: #43a047 !important; }
-.bg-pastel-4 { background-color: #fff3e0 !important; color: #fb8c00 !important; }
-.bg-pastel-5 { background-color: #fce4ec !important; color: #d81b60 !important; }
-.bg-pastel-6 { background-color: #e0f2f1 !important; color: #00897b !important; }
-
-.feature-card {
-    border: none !important;
-    background: #ffffff !important;
-    border-radius: 24px;
-    padding: 1.5rem;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.feature-card:hover {
-    transform: scale(1.04);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
-}
-
-.bg-light-step {
-    background-color: #ffffff !important;
-    border-radius: 30px;
-    margin: 40px 15px;
-    padding: 3rem 1rem;
-}
-
-.step-number {
-    width: 45px;
-    height: 45px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    background-color: var(--acento);
-    color: var(--blanco);
-    font-weight: bold;
-    box-shadow: 0 4px 10px rgba(230, 126, 34, 0.2);
-}
-
-.step-even {
-    background-color: #2c3e50 !important;
-    box-shadow: 0 4px 10px rgba(44, 62, 80, 0.2);
-}
-
-.hover-zoom {
-    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease !important;
-}
-
-.hover-zoom:hover {
-    transform: translateY(-8px) !important;
-    box-shadow: 0 15px 30px rgba(0,0,0,0.1) !important;
-}
-
-
-/* ==========================================================================
-   6. BOTONES DE ACCIÓN COMPLEMENTARIOS (ESTILO INNOVADOR)
-   ========================================================================== */
-.btn-orange-modern {
-    background-color: #53c73066;
-    color: #171616;
-    font-weight: 600;
-    border-radius: 30px;
-    padding: 12px 28px;
-    border: none;
-    transition: all 0.3s ease;
-}
-
-.btn-orange-modern:hover {
-    background-color: #c91b8c;
-    color: #ffffff;
-    transform: translateY(-1px);
-}
-
-.btn-outline-dark-brand {
-    background-color: transparent;
-    color: #2c3e50;
-    font-weight: 600;
-    border-radius: 30px;
-    padding: 12px 28px;
-    border: 2px solid #2c3e50;
-    transition: all 0.3s ease;
-}
-
-.btn-outline-dark-brand:hover {
-    background-color: #93c3f4;
-    color: #ffffff;
-}
-
-
-/* ==========================================================================
-   7. SECCIÓN: CONTROL DE ACCESO (LOGIN)
-   ========================================================================== */
-.login-container {
-    min-height: 70vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.login-card {
-    border: none;
-    border-radius: 24px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    background-color: #ffffff;
-    padding: 2.5rem;
-}
-
-.btn-login {
-    background-color: #2c3e50;
-    color: #ffffff;
-    border: none;
-    padding: 12px;
-    font-weight: 600;
-    border-radius: 16px;
-    transition: all 0.3s ease;
-}
-
-.btn-login:hover {
-    background-color: #1a252f;
-    color: #ffffff;
-    transform: translateY(-1px);
-}
-
-.form-control-custom-field {
-    border-radius: 12px;
-    padding: 10px 14px;
-    border: 2px solid #e2e8f0;
-}
-
-.form-control-custom-field:focus {
-    border-color: #a3e4d7; 
-    box-shadow: 0 0 0 0.25rem rgba(163, 228, 215, 0.25);
-}
-
-.login-warning-box {
-    background-color: #f8f9fa;
-    border-radius: 16px;
-    border: 1px solid #e9ecef;
-    padding: 1rem;
-}
-
-
-/* ==========================================================================
-   8. SECCIÓN: CONTACTO (ESTILOS LIMPIOS Y SEPARADOS)
-   ========================================================================== */
-.contact-container {
-    padding-top: 50px;
-    padding-bottom: 50px;
-}
-
-.contact-bg {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-    url('https://images.unsplash.com/photo-1516979187457-637abb4f9353?q=80&w=2000&auto=format&fit=crop');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    border-radius: 40px; 
-    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-    overflow: hidden;
-    padding: 60px 0;
-}
-
-.glass-card {
-    background: rgba(255, 255, 255, 0.95) !important;
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-}
-
-
-/* ==========================================================================
-   9. OPTIMIZACIÓN RESPONSIVA (MEDIA QUERIES NATIVAS)
-   ========================================================================== */
-
-/* --- CONFIGURACIÓN PARA DISPOSITIVOS MÓVILES (Pantallas menores a 768px) --- */
 @media (max-width: 767.98px) {
     .navbar {
-        margin: 10px !important;         /* Reduce márgenes excesivos en celular */
-        border-radius: 25px !important;  /* Ajusta la redondez para pantallas chicas */
-        padding: 10px 20px !important;
+        margin: 10px !important;         
+        border-radius: 25px !important;  
     }
-    
-    .navbar-nav {
-        align-items: flex-start !important; /* Links alineados horizontalmente al desplegar el menú */
-        width: 100%;
-        padding-top: 15px;
-        margin-left: 0;
+    .filter-news-card {
+        flex-direction: column !important;
+        width: 95% !important;
     }
-
-    .nav-link {
-        margin: 4px 0 !important;
-        width: 100%;
-        text-align: left;
+    .card-footer-blog, 
+    .card .d-flex.justify-content-between.align-items-center {
+        flex-direction: column !important;
+        gap: 10px;
+        align-items: flex-start !important;
     }
-    
-    .navbar .btn-link {
-        margin-left: 0;
-        margin-top: 5px;
-        display: block;
-        width: fit-content;
-    }
-
-    footer, .footer {
-        margin: 30px 10px 10px 10px !important; /* Evita que el footer flote fuera de los límites */
-        border-radius: 25px !important;
-        padding: 20px 10px !important;
-    }
-
-    .bg-white-capsule {
-        margin: 20px 5px !important;
-        padding: 2rem 1rem !important;
-        border-radius: 20px !important;
-    }
-
-    .bg-light-step {
-        margin: 20px 5px !important;
-        padding: 1.5rem 0.5rem !important;
-        border-radius: 20px !important;
-    }
-
-    .contact-bg {
-        border-radius: 20px !important;
-        padding: 30px 10px !important;
-    }
-
-    /* Evita que los textos gigantes rompan el viewport en teléfonos */
-    h1, .display-4 {
-        font-size: 2rem !important;
-    }
-    h2 {
-        font-size: 1.6rem !important;
-    }
-}
-/* --- DISEÑO DE LA VISTA DETALLE DEL LIBRO --- */
-
-.contenedor-detalle {
-    max-width: 1000px;
-    margin: 30px auto;
-    padding: 0 15px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.btn-volver {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #6c757d;
-    color: #ffffff;
-    text-decoration: none;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 500;
-    transition: background 0.3s ease;
-    margin-bottom: 20px;
-}
-
-.btn-volver:hover {
-    background-color: #5a6268;
-}
-
-.tarjeta-libro {
-    display: flex;
-    gap: 40px;
-    background: #ffffff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    border: 1px solid #e2e8f0;
-}
-
-/* Manejo de columnas responsive simple */
-@media (max-width: 768px) {
-    .tarjeta-libro {
-        flex-direction: column;
-    }
-}
-
-.seccion-portada {
-    flex: 1;
-    max-width: 300px;
-    min-width: 220px;
-}
-
-.imagen-portada {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    object-fit: cover;
-}
-
-.sin-portada {
-    background-color: #f8f9fa;
-    border: 2px dashed #cbd5e1;
-    border-radius: 8px;
-    height: 350px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: #94a3b8;
-    font-weight: 500;
-}
-
-.seccion-info {
-    flex: 2;
-}
-
-.titulo-libro {
-    font-size: 32px;
-    color: #2d3748;
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-weight: 700;
-}
-
-/* Ficha técnica estructurada <dl> */
-.ficha-tecnica {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    row-gap: 12px;
-    margin-bottom: 25px;
-    font-size: 16px;
-}
-
-.ficha-tecnica dt {
-    font-weight: bold;
-    color: #4a5568;
-}
-
-.ficha-tecnica dd {
-    margin: 0;
-    color: #1a202c;
-}
-
-.precio-destacado {
-    font-size: 22px;
-    font-weight: 700;
-    color: #2f855a; /* Color verde sutil a tono con tu header */
-}
-
-.etiqueta-autor {
-    display: inline-block;
-    padding: 4px 12px;
-    background-color: #edf2f7;
-    color: #4a5568;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-.sin-autor {
-    color: #a0aec0;
-    font-style: italic;
-}
-
-.separador {
-    border: 0;
-    border-top: 1px solid #e2e8f0;
-    margin: 25px 0;
-}
-
-.subtitulo-sinopsis {
-    font-size: 20px;
-    color: #2b6cb0;
-    margin-bottom: 12px;
-}
-
-.texto-descripcion {
-    font-size: 16px;
-    line-height: 1.6;
-    color: #4a5568;
-    white-space: pre-line;
 }

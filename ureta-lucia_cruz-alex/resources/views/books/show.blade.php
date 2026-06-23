@@ -43,6 +43,25 @@
                     <p class="mb-1 text-muted small"><strong>Clasificación:</strong> A&L Selección Especial</p>
                     <p class="mb-0 text-muted small"><strong>Fecha de registro:</strong> {{ $book->created_at ? $book->created_at->format('d/m/Y') : 'Hace mucho tiempo' }}</p>
                 </div>
+
+                <hr class="text-muted opacity-25">
+
+                {{-- SISTEMA DE RESERVA / ENVÍO DE EMAIL --}}
+                <div class="mt-4">
+                    @auth
+                        <form action="{{ route('books.reserve', ['id' => $book->id]) }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-success px-4 py-2 fw-bold shadow-sm">
+                                📩 Reservar este libro (Enviar Email)
+                            </button>
+                        </form>
+                    @else
+                        <div class="alert alert-warning d-inline-block" role="alert">
+                            Debés <a href="{{ route('login.show') }}" class="alert-link">iniciar sesión</a> para poder reservar este libro y recibir la confirmación por correo.
+                        </div>
+                    @endauth
+                </div>
+
             </div>
         </div>
     </div>

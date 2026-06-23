@@ -14,7 +14,6 @@
 
     <form action="{{ route('blog.update', ['id' => $post->id]) }}" method="POST" enctype="multipart/form-data">
         @csrf
-        @method('PUT')
 
         {{-- Campo Título --}}
         <div class="mb-3 text-start">
@@ -23,11 +22,11 @@
                 type="text"
                 id="titulo"
                 name="titulo"
-                class="form-control @error('titulo') is-invalid @enderror"
-                @error('titulo')
+                class="form-control {{ $errors->has('titulo') ? 'is-invalid' : '' }}"
+                @if($errors->has('titulo'))
                 aria-invalid="true"
                 aria-errormessage="error_titulo"
-                @enderror
+                @endif
                 value="{{ old('titulo', $post->title) }}"
             >
             @error('titulo')
@@ -42,11 +41,11 @@
                 type="text"
                 id="copete"
                 name="copete"
-                class="form-control @error('copete') is-invalid @enderror"
-                @error('copete')
+                class="form-control {{ $errors->has('copete') ? 'is-invalid' : '' }}"
+                @if($errors->has('copete'))
                 aria-invalid="true"
                 aria-errormessage="error_copete"
-                @enderror
+                @endif
                 value="{{ old('copete', $post->summary) }}"
             >
             @error('copete')
@@ -60,29 +59,29 @@
             <textarea
                 id="cuerpo"
                 name="cuerpo"
-                class="form-control @error('cuerpo') is-invalid @enderror"
+                class="form-control {{ $errors->has('cuerpo') ? 'is-invalid' : '' }}"
                 rows="5"
-                @error('cuerpo')
+                @if($errors->has('cuerpo'))
                 aria-invalid="true"
                 aria-errormessage="error_cuerpo"
-                @enderror
+                @endif
             >{{ old('cuerpo', $post->content) }}</textarea>
             @error('cuerpo')
                 <div class="text-danger" id="error_cuerpo">{{ $message }}</div>
             @enderror
         </div>
 
-        {{-- Desplegable de Autores Relacionados (Con la directiva @selected de Gallino) --}}
+        {{-- Desplegable de Autores Relacionados --}}
         <div class="mb-3 text-start">
             <label for="author_id" class="form-label fw-bold">Seleccionar Autor Relacionado:</label>
             <select
                 id="author_id"
                 name="author_id"
-                class="form-select @error('author_id') is-invalid @enderror"
-                @error('author_id')
+                class="form-select {{ $errors->has('author_id') ? 'is-invalid' : '' }}"
+                @if($errors->has('author_id'))
                 aria-invalid="true"
                 aria-errormessage="error_author_id"
-                @enderror
+                @endif
             >
                 <option value="">-- Elegí un autor --</option>
                 @foreach($autores as $autor)
@@ -99,7 +98,7 @@
             @enderror
         </div>
 
-        {{-- Visualización de la Imagen Actual (Punto obligatorio del parcial) --}}
+        {{-- Visualización de la Imagen Actual --}}
         <div class="mb-3 text-start">
             <div class="fw-bold mb-1">Imagen actual:</div>
             @if($post->image !== null && \Storage::disk('public')->exists($post->image))
@@ -118,12 +117,12 @@
                 type="file"
                 id="imagen"
                 name="imagen"
-                class="form-control @error('imagen') is-invalid @enderror"
+                class="form-control {{ $errors->has('imagen') ? 'is-invalid' : '' }}"
                 aria-describedby="help_imagen"
-                @error('imagen')
+                @if($errors->has('imagen'))
                 aria-invalid="true"
                 aria-errormessage="error_imagen"
-                @enderror
+                @endif
             >
             <div id="help_imagen" class="form-text">Solo elegí un archivo si deseás reemplazar la imagen actual del blog.</div>
             @error('imagen')

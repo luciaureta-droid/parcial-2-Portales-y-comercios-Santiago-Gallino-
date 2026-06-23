@@ -8,9 +8,9 @@
                 <h1 class="display-5 fw-bold text-dark-blue mt-1 mb-0">Gestión de Libros</h1>
             </div>
             <div class="col-md-4 text-center text-md-end mt-3 mt-md-0">
-                {{-- Más adelante le crearemos la ruta books.create aquí --}}
-                <a href="#" class="btn btn-success px-4 py-2 shadow-sm fw-bold">
-                    ➕ Cargar Nuevo Libro
+                {{-- Vinculamos la acción de cargar libro con su ruta real --}}
+                <a href="{{ route('books.create') }}" class="btn btn-success px-4 py-2 shadow-sm fw-bold">
+                     Cargar Nuevo Libro
                 </a>
             </div>
         </div>
@@ -45,13 +45,12 @@
                                 {{-- Ver Detalle --}}
                                 <a href="{{ route('books.show', ['id' => $book->id]) }}" class="btn btn-sm btn-warning text-white px-3 fw-bold">Ver</a>
                                 
-                                {{-- 🌟 Editar (Vinculado a la ruta nueva) --}}
+                                {{-- Editar --}}
                                 <a href="{{ route('books.edit', ['id' => $book->id]) }}" class="btn btn-sm btn-secondary px-3">Editar</a>
                                 
-                                {{-- 🌟 Eliminar (Con formulario seguro por método DELETE) --}}
+                                {{-- Eliminar (Modificado al estilo del profe: POST directo sin @method) --}}
                                 <form action="{{ route('books.destroy', ['id' => $book->id]) }}" method="POST" onsubmit="return confirm('¿Seguro que querés eliminar el libro: {{ $book->title }}?');" class="m-0">
                                     @csrf
-                                    @method('DELETE')
                                     <button type="submit" class="btn btn-sm btn-danger px-3">Eliminar</button>
                                 </form>
                             </div>

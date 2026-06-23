@@ -2,10 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,19 +14,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Creamos el usuario Administrador real para el examen (datos.txt)
-        User::create([
-            'name' => 'Administrador',
-            'email' => 'admin@books.com',
-            'password' => Hash::make('password123'), // Así queda encriptada en la base de datos
-        ]);
-
-        // Llamamos al seeder de libros que ya tenías configurado
+        // Acá podemos definir los seeders por defecto que el comando "db:seed" debe ejecutar, y en
+        // qué orden debe hacerlo.
         $this->call([
-            AuthorSeeder::class,
-            GenreSeeder::class,
-            BookSeeder::class,
-            BookGenreSeeder::class,
+            UserSeeder::class,      // Primero creamos los usuarios para la autenticación
+            AuthorSeeder::class,    // Autores de los libros
+            GenreSeeder::class,     // Géneros literarios
+            BookSeeder::class,      // Catálogo de libros principales
+            BookGenreSeeder::class, // Tabla intermedia de relaciones
         ]);
     }
 }

@@ -42,7 +42,7 @@
 
     <h2 class="mb-3 text-danger">¿Seguro que querés eliminar este artículo?</h2>
 
-    {{-- Formulario que ejecuta la acción DELETE por método POST en Laravel con la directiva @method --}}
+    {{-- Formulario estructurado para enviar petición DELETE con soporte nativo de Laravel --}}
     <form action="{{ route('blog.destroy', ['id' => $post->id]) }}" method="POST">
         @csrf
         @method('DELETE')

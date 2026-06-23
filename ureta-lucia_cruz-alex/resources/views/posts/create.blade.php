@@ -19,14 +19,7 @@
         {{-- Campo Título --}}
         <div class="mb-3 text-start">
             <label for="titulo" class="form-label fw-bold">Título:</label>
-            {{--
-            El helper old() de Laravel permite obtener el valor previo de un campo de formulario
-            que haya sido guardado en la sesión por el validate().
-
-            ## Errores accesibles (Atributos ARIA obligatorios por Gallino)
-            - aria-invalid: Indica si el campo tiene un valor incorrecto (true/false).
-            - aria-errormessage: Lleva el id del div que contiene el texto de error.
-            --}}
+         
             <input
                 type="text"
                 id="titulo"
@@ -104,6 +97,27 @@
             </select>
             @error('author_id')
                 <div class="text-danger" id="error_author_id">{{ $message }}</div>
+            @enderror
+        </div>
+
+        {{-- 🌟 NUEVO CAMPO: Agregar autor nuevo si no figura en la lista --}}
+        <div class="mb-3 text-start bg-light p-3 rounded border">
+            <label for="new_author_name" class="form-label fw-bold text-secondary">¿El autor no está en la lista? Escribilo acá:</label>
+            <input
+                type="text"
+                id="new_author_name"
+                name="new_author_name"
+                class="form-control @error('new_author_name') is-invalid @enderror"
+                @error('new_author_name')
+                aria-invalid="true"
+                aria-errormessage="error_new_author_name"
+                @enderror
+                value="{{ old('new_author_name') }}"
+                placeholder="Nombre del autor nuevo..."
+            >
+            <div class="form-text text-muted">Si escribís un nombre acá, se creará el autor automáticamente y se ignorará la selección del menú de arriba.</div>
+            @error('new_author_name')
+                <div class="text-danger" id="error_new_author_name">{{ $message }}</div>
             @enderror
         </div>
 
