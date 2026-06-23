@@ -30,10 +30,17 @@
                     @forelse($books as $book)
                     <tr>
                         <td style="width: 90px;">
-                            <img src="{{ asset('covers/imagenes/' . ($book->cover ?? 'default.png')) }}" 
-                                 alt="Portada de {{ $book->title }}" 
-                                 class="img-thumbnail shadow-sm" 
-                                 style="max-height: 70px; object-fit: cover;">
+                            @if($book->cover !== null && Storage::disk('public')->exists($book->cover))
+    <img
+        src="{{ Storage::url($book->cover) }}"
+        alt="{{ $book->cover_description ?? 'Portada de ' . $book->title }}"
+        class="admin-book-cover"
+    >
+@else
+    <div class="admin-book-cover-placeholder">
+        Sin portada
+    </div>
+@endif
                         </td>
 
                         <td class="fw-bold text-dark-blue text-start fs-5">{{ $book->title }}</td>
