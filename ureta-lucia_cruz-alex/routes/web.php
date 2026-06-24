@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BookAdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
@@ -14,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 // Ruta raíz: Redirecciona al catálogo de libros
-Route::get('/', function () {
+/* Route::get('/', function () {
     return redirect()->route('books.index');
-})->name('home');
+})->name('home'); */
+
+//Direccionamiento de home, nosotros y contacto, queda funcionando.
+Route::get('/', [HomeController::class, 'home'])->name('home');
+Route::get('/nosotros', [HomeController::class, 'about'])->name('about');
+Route::get('/contacto', [HomeController::class, 'contacto'])->name('contacto');
 
 // Catálogo de Libros público
 Route::get('/libros', [BookController::class, 'index'])->name('books.index');
@@ -27,17 +33,25 @@ Route::get('/blog', [PostController::class, 'index'])->name('blog.index');
 Route::get('/blog/{id}', [PostController::class, 'show'])->name('blog.show')->whereNumber('id');
 
 // Secciones institucionales complementarias
-Route::get('/nosotros', function () {
+/* Esto lo comente  */
+/* Route::get('/nosotros', function () {
     return "Pagina Sobre Nosotros (En construccion)";
-})->name('about');
+})->name('about'); */
 
 Route::get('/nosotros-es', function () {
     return redirect()->route('about');
 })->name('nosotros');
 
-Route::get('/contacto', function () {
-    return "Pagina de Contacto (En construccion)";
-})->name('contacto');
+
+
+/* Route::get('/nosotros-es', function () {
+    return redirect()->route('about');
+})->name('nosotros'); */
+
+/* Route::get('/contacto', function () {
+    //return "Pagina de Contacto (En construccion)";
+    return redirect()->route('contacto');
+})->name('contacto'); */
 
 
 /*
