@@ -66,6 +66,35 @@
                         @enderror
                     </div>
 
+                    
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Géneros:</label>
+                                            
+                        @foreach($genres as $genre)
+                            <div class="form-check">
+                                <input
+                                    type="checkbox"
+                                    id="genre_{{ $genre->id }}"
+                                    name="genres[]"
+                                    value="{{ $genre->id }}"
+                                    class="form-check-input"
+                                    @checked(in_array($genre->id, old('genres', [])))
+                                >
+                            
+                                <label for="genre_{{ $genre->id }}" class="form-check-label">
+                                    {{ $genre->name }}
+                                </label>
+                            </div>
+                        @endforeach
+                        
+                        @error('genres')
+                            <div class="text-danger mt-1 small">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    
+
+
+
                     {{-- Campo: Fecha de Publicación --}}
                     <div class="col-md-6 mb-4">
                         <label for="publication_date" class="form-label fw-bold text-dark-blue">Fecha de Publicación:</label>

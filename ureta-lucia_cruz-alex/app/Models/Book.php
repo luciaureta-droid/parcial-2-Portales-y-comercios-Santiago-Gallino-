@@ -32,6 +32,9 @@ class Book extends Model
         return $this->belongsTo(Author::class, 'author_fk');
     }
 
+    
+
+
     public function genres(): BelongsToMany
     {
         return $this->belongsToMany(
@@ -39,6 +42,6 @@ class Book extends Model
             'book_genre',
             'book_fk',
             'genre_fk'
-        );
+        )->withTimestamps();
     }
 }

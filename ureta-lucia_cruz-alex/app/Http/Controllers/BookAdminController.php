@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Author;
+use App\Models\Genre;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -21,13 +22,13 @@ class BookAdminController extends Controller
     public function create()
     {
         $authors = Author::all();
+        $genres = Genre::all();
 
         return view('books.create', [
             'authors' => $authors,
+            'genres' => $genres,
         ]);
     }
-
-
 
     public function store(Request $request)
     {
@@ -39,6 +40,8 @@ class BookAdminController extends Controller
             'new_author_name'  => 'nullable|string|max:100',
             'description'      => 'nullable|string',
             'cover'            => 'nullable|image',
+            'genres'           => 'nullable|array',
+            'genres.*'         => 'integer|exists:genres,id',
         ], [
             'title.required'            => 'El título debe tener un valor.',
             'title.min'                 => 'El título debe tener al menos :min caracteres.',
@@ -84,25 +87,26 @@ class BookAdminController extends Controller
 
         $book = Book::create($data);
 
+        $book->genres()->sync($request->input('genres', []));
+
         return redirect()
             ->route('books.admin')
             ->with('feedback.message', 'El libro <b>' . e($book->title) . '</b> se creó con éxito.')
             ->with('feedback.type', 'success');
     }
 
-
-
     public function edit(int $id)
     {
         $book = Book::findOrFail($id);
         $authors = Author::all();
+        $genres = Genre::all();
 
         return view('books.edit', [
             'book' => $book,
             'authors' => $authors,
+            'genres' => $genres,
         ]);
     }
-
 
     public function update(Request $request, int $id)
     {
@@ -115,6 +119,8 @@ class BookAdminController extends Controller
             'author_fk'        => 'nullable|integer',
             'description'      => 'nullable|string',
             'cover'            => 'nullable|image',
+            'genres'           => 'nullable|array',
+            'genres.*'         => 'integer|exists:genres,id',
         ], [
             'title.required'        => 'El título debe tener un valor.',
             'title.min'             => 'El título debe tener al menos :min caracteres.',
@@ -142,29 +148,22 @@ class BookAdminController extends Controller
 
         $book->update($data);
 
+        $book->genres()->sync($request->input('genres', []));
+
         return redirect()
             ->route('books.admin')
             ->with('feedback.message', 'El libro <b>' . e($book->title) . '</b> se editó con éxito.')
             ->with('feedback.type', 'success');
     }
 
-
-    /* public function destroy(int $id)
+    public function delete(int $id)
     {
         $book = Book::findOrFail($id);
 
-        // Uso formal de Eloquent para limpiar la relación muchos a muchos en book_genre
-        $book->genres()->detach();
-
-        // Elimina el registro padre de forma limpia
-        $book->delete();
-
-        return redirect()
-            ->route('books.admin')
-            ->with('feedback.message', 'El libro <b>' . e($book->title) . '</b> se eliminó con éxito.')
-            ->with('feedback.type', 'success');
+        return view('books.delete', [
+            'book' => $book,
+        ]);
     }
- */
 
     public function destroy(int $id)
     {
@@ -182,19 +181,5 @@ class BookAdminController extends Controller
             ->route('books.admin')
             ->with('feedback.message', 'El libro <b>' . e($book->title) . '</b> se eliminó con éxito.')
             ->with('feedback.type', 'success');
-    }
-
-
-
-
-
-
-    public function delete(int $id)
-    {
-        $book = Book::findOrFail($id);
-
-        return view('books.delete', [
-            'book' => $book,
-        ]);
     }
 }
