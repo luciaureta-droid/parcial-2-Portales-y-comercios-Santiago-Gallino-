@@ -12,10 +12,24 @@
         <div class="row bg-white rounded shadow-sm border overflow-hidden p-4 g-4 align-items-center">
             {{-- Columna de la Portada --}}
             <div class="col-md-4 text-center bg-light-gray py-4 rounded">
-                <img src="{{ asset('covers/imagenes/' . ($book->cover ?? 'default.png')) }}" 
+
+                {{-- <img src="{{ asset('covers/imagenes/' . ($book->cover ?? 'default.png')) }}" 
                      alt="Portada de {{ $book->title }}" 
                      class="img-fluid rounded shadow" 
-                     style="max-height: 400px; object-fit: cover;">
+                     style="max-height: 400px; object-fit: cover;"> --}}
+
+
+                 @if($book->cover !== null && Storage::disk('public')->exists($book->cover))
+                    <img
+                        src="{{ Storage::url($book->cover) }}"
+                        alt="{{ $book->cover_description ?? 'Portada de ' . $book->title }}"
+                        class="img-fluid rounded shadow book-cover"
+                    >
+                @else
+                    <div class="book-cover-placeholder">
+                        Sin portada
+                    </div>
+                @endif
             </div>
 
             {{-- Columna de la Información Técnica --}}

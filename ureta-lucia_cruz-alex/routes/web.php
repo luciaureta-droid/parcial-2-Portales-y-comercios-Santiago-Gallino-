@@ -89,8 +89,15 @@ Route::get('/admin/libros', [BookAdminController::class, 'index'])->name('books.
 Route::get('/admin/libros/nuevo', [BookAdminController::class, 'create'])->name('books.create')->middleware('admin');
 Route::post('/admin/libros/nuevo', [BookAdminController::class, 'store'])->name('books.store')->middleware('admin');
 
-Route::get('/admin/libros/{id}/editar', [BookAdminController::class, 'edit'])->name('books.edit')->middleware('admin')->whereNumber('id');
-Route::put('/admin/libros/{id}/editar', [BookAdminController::class, 'update'])->name('books.update')->middleware('admin')->whereNumber('id');
+Route::get('/admin/libros/{id}/editar', [BookAdminController::class, 'edit'])
+    ->name('books.edit')
+    ->middleware('admin')
+    ->whereNumber('id');
+
+Route::put('/admin/libros/{id}/editar', [BookAdminController::class, 'update'])
+    ->name('books.update')
+    ->middleware('admin')
+    ->whereNumber('id');
 
 Route::get('/admin/libros/{id}/eliminar', [BookAdminController::class, 'delete'])->name('books.delete')->middleware('admin')->whereNumber('id');
 Route::delete('/admin/libros/{id}/eliminar', [BookAdminController::class, 'destroy'])->name('books.destroy')->middleware('admin')->whereNumber('id');

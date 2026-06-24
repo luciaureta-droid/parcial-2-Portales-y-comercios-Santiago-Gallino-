@@ -18,7 +18,7 @@
     {{-- Modificado al estilo del profe: POST directo y con soporte para subir portadas (enctype) --}}
     <form action="{{ route('books.update', ['id' => $book->id]) }}" method="POST" enctype="multipart/form-data" class="text-start">
         @csrf
-        {{-- Quitamos el @method('PUT') para evitar el error de método no soportado --}}
+        @method('PUT') {{-- el @method('PUT') para evitar el error de método no soportado --}}
 
         {{-- Campo: Título --}}
         <div class="mb-3">
@@ -79,8 +79,19 @@
         {{-- Control de Portada Actual (Inspirado en el código de películas del profe) --}}
         <div class="mb-3">
             <div class="fw-bold mb-2">Portada actual:</div>
-            @if($book->cover !== null)
+            {{-- @if($book->cover !== null)
                 <img src="{{ asset('covers/imagenes/' . $book->cover) }}" alt="Portada de {{ $book->title }}" class="img-thumbnail shadow-sm mb-2" style="max-height: 150px; object-fit: cover;">
+            @else
+                <p class="text-muted fst-italic small">No tiene una portada actualmente asignada.</p>
+            @endif --}}
+            
+            @if($book->cover !== null && Storage::disk('public')->exists($book->cover))
+                <img
+                    src="{{ Storage::url($book->cover) }}"
+                    alt="Portada de {{ $book->title }}"
+                    class="img-thumbnail shadow-sm mb-2"
+                    style="max-height: 150px; object-fit: cover;"
+                >
             @else
                 <p class="text-muted fst-italic small">No tiene una portada actualmente asignada.</p>
             @endif

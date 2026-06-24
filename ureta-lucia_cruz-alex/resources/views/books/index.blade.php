@@ -25,13 +25,19 @@
                         
                         {{-- Portada con badge de precio y gris suave de fondo --}}
                         <div class="book-cover-wrapper position-relative p-4 bg-light-gray text-center">
-                            <img src="{{ asset('covers/imagenes/' . ($book->cover ?? 'default.png')) }}" 
-                                 alt="Portada de {{ $book->title }}" 
-                                 class="img-fluid book-cover shadow-sm">
                             
-                            <span class="position-absolute top-0 end-0 bg-dark-blue text-white fw-bold px-3 py-1 m-2 rounded-pill small">
-                                $ {{ number_format($book->price, 0, ',', '.') }}
-                            </span>
+                            @if($book->cover !== null && Storage::disk('public')->exists($book->cover))
+                                <img
+                                    src="{{ Storage::url($book->cover) }}"
+                                    alt="{{ $book->cover_description ?? 'Portada de ' . $book->title }}"
+                                    class="img-fluid book-cover shadow-sm"
+                                >
+                            @else
+                                <div class="book-cover-placeholder">
+                                    Sin portada
+                                </div>
+                            @endif
+
                         </div>
 
                         {{-- Info del Libro --}}
