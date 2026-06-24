@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Book extends Model
 {
@@ -27,12 +28,20 @@ class Book extends Model
         'author_fk',
     ];
 
+    public function price(): Attribute
+    {
+        return Attribute::make(
+            get: fn($value) => $value / 100,
+            set: fn($value) => $value * 100,
+        );
+    }
+
     public function author(): BelongsTo
     {
         return $this->belongsTo(Author::class, 'author_fk');
     }
 
-    
+
 
 
     public function genres(): BelongsToMany

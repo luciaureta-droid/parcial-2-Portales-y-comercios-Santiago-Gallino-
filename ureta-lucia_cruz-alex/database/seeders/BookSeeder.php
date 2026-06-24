@@ -9,44 +9,14 @@ class BookSeeder extends Seeder
 {
     public function run(): void
     {
-        // Le indicamos a Laravel que guarde estos libros en tu tabla 'books'
-        /* DB::table('books')->insert([
-            [
-                'title' => 'El Alquimista - Paulo Coelho',
-                'price' => 12500,
-                'cover' => 'alquimista.png',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'Cien Años de Soledad - Gabriel García Márquez',
-                'price' => 18900,
-                'cover' => 'soledad.png',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'Ficciones - Jorge Luis Borges',
-                'price' => 14200,
-                'cover' => 'ficciones.png',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'title' => 'El Principito - Antoine de Saint-Exupéry',
-                'price' => 8500,
-                'cover' => 'principito.png',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
-        ]); */
+        
 
         DB::table('books')->insert([
 
             [
                 'title' => 'El Alquimista',
                 'author_fk' => 1,
-                'price' => 12500,
+                'price' => 1250,
                 'publication_date' => '1988-01-01',
                 'description' => 'Una novela sobre el destino y la búsqueda personal.',
                 'cover' => null,
@@ -58,7 +28,7 @@ class BookSeeder extends Seeder
             [
                 'title' => 'Cien Años de Soledad',
                 'author_fk' => 2,
-                'price' => 18900,
+                'price' => 1890,
                 'publication_date' => '1967-05-30',
                 'description' => 'Una obra maestra del realismo mágico latinoamericano.',
                 'cover' => null,
@@ -70,7 +40,7 @@ class BookSeeder extends Seeder
             [
                 'title' => 'Ficciones',
                 'author_fk' => 3,
-                'price' => 14200,
+                'price' => 1420,
                 'publication_date' => '1944-01-01',
                 'description' => 'Colección de cuentos filosóficos y fantásticos.',
                 'cover' => null,
@@ -82,7 +52,7 @@ class BookSeeder extends Seeder
             [
                 'title' => 'El Principito',
                 'author_fk' => 4,
-                'price' => 8500,
+                'price' => 2510,
                 'publication_date' => '1943-04-06',
                 'description' => 'Un clásico sobre la amistad, la inocencia y la vida.',
                 'cover' => null,
