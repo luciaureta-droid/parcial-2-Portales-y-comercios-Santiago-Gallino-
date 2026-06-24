@@ -149,7 +149,7 @@ class BookAdminController extends Controller
     }
 
 
-    public function destroy(int $id)
+    /* public function destroy(int $id)
     {
         $book = Book::findOrFail($id);
 
@@ -163,5 +163,38 @@ class BookAdminController extends Controller
             ->route('books.admin')
             ->with('feedback.message', 'El libro <b>' . e($book->title) . '</b> se eliminó con éxito.')
             ->with('feedback.type', 'success');
+    }
+ */
+
+    public function destroy(int $id)
+    {
+        $book = Book::findOrFail($id);
+
+        $book->genres()->detach();
+
+        if ($book->cover !== null && Storage::disk('public')->exists($book->cover)) {
+            Storage::disk('public')->delete($book->cover);
+        }
+
+        $book->delete();
+
+        return redirect()
+            ->route('books.admin')
+            ->with('feedback.message', 'El libro <b>' . e($book->title) . '</b> se eliminó con éxito.')
+            ->with('feedback.type', 'success');
+    }
+
+
+
+
+
+
+    public function delete(int $id)
+    {
+        $book = Book::findOrFail($id);
+
+        return view('books.delete', [
+            'book' => $book,
+        ]);
     }
 }

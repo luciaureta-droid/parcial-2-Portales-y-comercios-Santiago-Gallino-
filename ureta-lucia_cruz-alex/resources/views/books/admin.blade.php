@@ -62,11 +62,9 @@
                                 {{-- Editar --}}
                                 <a href="{{ route('books.edit', ['id' => $book->id]) }}" class="btn btn-sm btn-secondary px-3">Editar</a>
                                 
-                                {{-- Eliminar (Modificado al estilo del profe: POST directo sin @method) --}}
-                                <form action="{{ route('books.destroy', ['id' => $book->id]) }}" method="POST" onsubmit="return confirm('¿Seguro que querés eliminar el libro: {{ $book->title }}?');" class="m-0">
-                                    @csrf
-                                    <button type="submit" class="btn btn-sm btn-danger px-3">Eliminar</button>
-                                </form>
+                                {{-- Eliminar  --}}
+                               
+                                <a href="{{ route('books.delete', ['id' => $book->id]) }}" class="btn btn-danger">Eliminar</a>
                             </div>
                         </td>
                     </tr>

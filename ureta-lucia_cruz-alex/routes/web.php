@@ -99,8 +99,16 @@ Route::put('/admin/libros/{id}/editar', [BookAdminController::class, 'update'])
     ->middleware('admin')
     ->whereNumber('id');
 
-Route::get('/admin/libros/{id}/eliminar', [BookAdminController::class, 'delete'])->name('books.delete')->middleware('admin')->whereNumber('id');
-Route::delete('/admin/libros/{id}/eliminar', [BookAdminController::class, 'destroy'])->name('books.destroy')->middleware('admin')->whereNumber('id');
+Route::get('/admin/libros/{id}/eliminar', [BookAdminController::class, 'delete'])
+    ->name('books.delete')
+    ->middleware('admin')
+    ->whereNumber('id');
+
+
+Route::delete('/admin/libros/{id}/eliminar', [BookAdminController::class, 'destroy'])
+    ->name('books.destroy')
+    ->middleware('admin')
+    ->whereNumber('id');
 
 
 // --- CRUD de Blog / Noticias (Panel Admin) ---
