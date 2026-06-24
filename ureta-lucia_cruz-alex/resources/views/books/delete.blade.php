@@ -16,7 +16,7 @@
 
     <dl class="mb-3">
         <dt><b>Precio</b></dt>
-        <dd>$ {{ number_format($book->price, 0, ',', '.') }}</dd>
+        <dd>$ {{ number_format($book->price, 2, ',', '.') }}</dd>
 
         <dt><b>Fecha de publicación</b></dt>
         <dd>{{ $book->publication_date }}</dd>

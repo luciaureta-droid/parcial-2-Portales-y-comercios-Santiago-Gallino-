@@ -52,7 +52,7 @@
 
                         <td class="fw-bold text-dark-blue text-start fs-5">{{ $book->title }}</td>
 
-                        <td class="fw-bold text-success fs-5">$ {{ number_format($book->price, 0, ',', '.') }}</td>
+                        <td class="fw-bold text-success fs-5">$ {{ number_format($book->price, 2, ',', '.') }}</td>
 
                         <td>
                             <div class="d-flex gap-2 justify-content-center">

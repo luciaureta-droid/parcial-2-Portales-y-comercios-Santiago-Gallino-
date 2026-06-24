@@ -26,7 +26,8 @@
 
         {{-- Contenedor principal que usa tu clase de style.css --}}
         <div class="form-container p-4 p-md-5">
-            <form action="{{ route('books.store') }}" method="POST">
+            
+            <form action="{{ route('books.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
 
                 {{-- Campo: Título --}}
@@ -58,7 +59,7 @@
                                 name="price"
                                 class="form-control @error('price') is-invalid @enderror"
                                 value="{{ old('price') }}"
-                                placeholder="Ej: 4500"
+                                placeholder="Ej: 12.85 - usar . numerico"
                             >
                         </div>
                         @error('price')
@@ -167,6 +168,26 @@
                         placeholder="Escribí una breve reseña del libro..."
                     >{{ old('description') }}</textarea>
                     @error('description')
+                        <div class="error-message-custom">{{ $message }}</div>
+                    @enderror
+                </div>
+
+
+                {{-- Campo: Portada --}}
+                <div class="mb-4">
+                    <label for="cover" class="form-label fw-bold text-dark-blue">Portada del libro:</label>
+                    <input
+                        type="file"
+                        id="cover"
+                        name="cover"
+                        class="form-control @error('cover') is-invalid @enderror"
+                        accept="image/*"
+                    >
+                    <div class="form-text text-muted">
+                        Seleccioná una imagen para usar como portada del libro.
+                    </div>
+                
+                    @error('cover')
                         <div class="error-message-custom">{{ $message }}</div>
                     @enderror
                 </div>

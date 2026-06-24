@@ -32,7 +32,7 @@
 
                 <div class="mb-4">
                     <span class="fs-3 fw-bold text-success bg-light px-3 py-2 rounded border">
-                        $ {{ number_format($book->price, 0, ',', '.') }}
+                        $ {{ number_format($book->price, 2, ',', '.') }}
                     </span>
                 </div>
 
